@@ -1,0 +1,12 @@
+BasedOnStyle: llvm
+PointerAlignment: Left
+AllowShortCaseLabelsOnASingleLine: true
+AlwaysBreakTemplateDeclarations: true
+IncludeBlocks: Merge
+IncludeCategories:
+  - Regex: '^"'
+    Priority: 2
+  - Regex: '^<(std.*\.h|[^.]*)>$'
+    Priority: 5
+  - Regex: '^<.*\.h>$'
+    Priority: 4

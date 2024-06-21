@@ -1,0 +1,6 @@
+TESTF(DA64_HAVE_PAuth, 0xf8200420, DA64I_LDRAA, "ldraa x0, [x1]")
+TESTF(DA64_HAVE_PAuth, 0xf8201420, DA64I_LDRAA, "ldraa x0, [x1, #0x8]")
+TESTF(DA64_HAVE_PAuth, 0xf87ff420, DA64I_LDRAA, "ldraa x0, [x1, #-0x8]")
+TESTF(DA64_HAVE_PAuth, 0xf83ff420, DA64I_LDRAA, "ldraa x0, [x1, #0xff8]")
+TESTF(DA64_HAVE_PAuth, 0xf8601420, DA64I_LDRAA, "ldraa x0, [x1, #-0xff8]")
+TESTF(DA64_HAVE_PAuth, 0xf8600420, DA64I_LDRAA, "ldraa x0, [x1, #-0x1000]")

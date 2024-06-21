@@ -1,0 +1,26 @@
+// Test MUL_ELEM
+TEST(0x4f428020, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 0));
+TEST(0x4f528020, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 1));
+TEST(0x4f628020, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 2));
+TEST(0x4f728020, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 3));
+TEST(0x4f428820, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 4));
+TEST(0x4f528820, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 5));
+TEST(0x4f628820, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 6));
+TEST(0x4f728820, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 7));
+TEST(0, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 8));
+TEST(0, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 15));
+TEST(0, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(2), 32));
+TEST(0, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(16), 5));
+TEST(0, de64_MUL8h_elem(DA_V(0), DA_V(1), DA_V(31), 5));
+TEST(0x4f828020, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(2), 0));
+TEST(0x4f928020, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(18), 0));
+TEST(0x4fa28020, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(2), 1));
+TEST(0x4fb28020, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(18), 1));
+TEST(0x4f828820, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(2), 2));
+TEST(0x4f928820, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(18), 2));
+TEST(0x4fa28820, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(2), 3));
+TEST(0x4fb28820, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(18), 3));
+TEST(0, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(18), 4));
+TEST(0, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(18), 7));
+TEST(0, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(18), 8));
+TEST(0, de64_MUL4s_elem(DA_V(0), DA_V(1), DA_V(18), 15));

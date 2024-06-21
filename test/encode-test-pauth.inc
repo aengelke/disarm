@@ -1,0 +1,22 @@
+#if DA64_HAVE_PAuth
+TEST(0xf8200420, de64_LDRAA(DA_GP(0), DA_GP(1), 0x0));
+TEST(0xf8200c20, de64_LDRAA_pre(DA_GP(0), DA_GP(1), 0x0));
+TEST(0, de64_LDRAA(DA_GP(0), DA_GP(1), 0x1));
+TEST(0, de64_LDRAA_pre(DA_GP(0), DA_GP(1), 0x1));
+TEST(0, de64_LDRAA(DA_GP(0), DA_GP(1), -0x1));
+TEST(0, de64_LDRAA_pre(DA_GP(0), DA_GP(1), -0x1));
+TEST(0xf8201420, de64_LDRAA(DA_GP(0), DA_GP(1), 0x8));
+TEST(0xf8201c20, de64_LDRAA_pre(DA_GP(0), DA_GP(1), 0x8));
+TEST(0xf87ff420, de64_LDRAA(DA_GP(0), DA_GP(1), -0x8));
+TEST(0xf87ffc20, de64_LDRAA_pre(DA_GP(0), DA_GP(1), -0x8));
+TEST(0xf83ff420, de64_LDRAA(DA_GP(0), DA_GP(1), 0xff8));
+TEST(0xf83ffc20, de64_LDRAA_pre(DA_GP(0), DA_GP(1), 0xff8));
+TEST(0xf8601420, de64_LDRAA(DA_GP(0), DA_GP(1), -0xff8));
+TEST(0xf8601c20, de64_LDRAA_pre(DA_GP(0), DA_GP(1), -0xff8));
+TEST(0, de64_LDRAA(DA_GP(0), DA_GP(1), 0x1000));
+TEST(0, de64_LDRAA_pre(DA_GP(0), DA_GP(1), 0x1000));
+TEST(0xf8600420, de64_LDRAA(DA_GP(0), DA_GP(1), -0x1000));
+TEST(0xf8600c20, de64_LDRAA_pre(DA_GP(0), DA_GP(1), -0x1000));
+TEST(0, de64_LDRAA(DA_GP(0), DA_GP(1), -0x1008));
+TEST(0, de64_LDRAA_pre(DA_GP(0), DA_GP(1), -0x1008));
+#endif

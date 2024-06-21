@@ -1,0 +1,41 @@
+// LDR with register offset
+TEST(0xf8626820, de64_LDRxr(DA_GP(0), DA_GP(1), DA_GP(2)));
+TEST(0xf8626820, de64_LDRxr_lsl(DA_GP(0), DA_GP(1), DA_GP(2), 0));
+TEST(0xf8627820, de64_LDRxr_lsl(DA_GP(0), DA_GP(1), DA_GP(2), 8));
+
+// LDP
+TEST(0x29400500, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), 0x0));
+TEST(0xa9400500, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), 0));
+TEST(0, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), 0x1));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), 1));
+TEST(0, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), 0x2));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), 4));
+TEST(0x29408500, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), 0x4));
+TEST(0xa9408500, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), 8));
+TEST(0x29500500, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), 0x80));
+TEST(0xa9500500, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), 0x100));
+TEST(0x295f8500, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), 0xfc));
+TEST(0xa95f8500, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), 0x1f8));
+TEST(0, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), 0xfd));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), 0x1f9));
+TEST(0, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), 0x100));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), 0x200));
+TEST(0, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), -0x1));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), -1));
+TEST(0, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), -0x2));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), -4));
+TEST(0x297f8500, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), -0x4));
+TEST(0xa97f8500, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), -8));
+TEST(0x29700500, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), -0x80));
+TEST(0xa9700500, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), -0x100));
+TEST(0x29608500, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), -0xfc));
+TEST(0xa9608500, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), -0x1f8));
+TEST(0, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), -0xfd));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), -0x1f9));
+TEST(0x29600500, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), -0x100));
+TEST(0xa9600500, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), -0x200));
+TEST(0, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), -0x101));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), -0x201));
+TEST(0, de64_LDPw(DA_GP(0), DA_GP(1), DA_GP(8), -0x104));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(1), DA_GP(8), -0x208));
+TEST(0, de64_LDPx(DA_GP(0), DA_GP(0), DA_GP(8), 0)); // unpredictable 0xa9400100
