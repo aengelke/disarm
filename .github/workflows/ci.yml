@@ -1,0 +1,18 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt install -y ninja-build meson gcc
+    - name: Configure
+      run: mkdir build; meson setup -Dbuildtype=debugoptimized build
+    - name: Build
+      run: ninja -v -C build
+    - name: Test
+      run: meson test -v -C build
+
