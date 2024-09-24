@@ -283,7 +283,7 @@ void da64_format(const struct Da64Inst* ddi, char* buf128) {
     case DA_OP_UIMMSHIFT:
       end = da_strpcat4(end, "#0x", 3);
       end = da_strpcatuimmhex(end, ddi->ops[i].uimm16);
-      end = da_strpcat8(end, &", lsl, msl"[ddi->ops[i].immshift.mask * 5], 5);
+      end = da_strpcat8(end, &", lsl, msl  "[ddi->ops[i].immshift.mask * 5], 5);
       end = da_strpcatimmdecstr(end, ddi->ops[i].immshift.shift, 0);
       break;
     case DA_OP_IMMFLOAT: {
