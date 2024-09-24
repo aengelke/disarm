@@ -2,9 +2,9 @@
 #include "disarm64.h"
 #include <stdint.h>
 
-static int64_t sext(uint64_t imm, unsigned bits) {
+static uint64_t sext(uint64_t imm, unsigned bits) {
   uint64_t sign = 1 << (bits - 1);
-  return imm & sign ? (imm ^ sign) - sign : imm;
+  return (int64_t)(imm & sign ? (imm ^ sign) - sign : imm);
 }
 
 static unsigned clz(uint32_t v, unsigned sz) {

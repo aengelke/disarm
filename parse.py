@@ -323,7 +323,7 @@ class DecoderGenerator:
         ops = set(x[1:] for x in re.findall(r'@[a-zA-Z0-9_]+', decodestr))
         for de in desc:
             if de.name in ops:
-                ty = "int64_t" if de.flags == "s" else "uint64_t"
+                ty = "uint64_t" if de.flags == "s" else "uint64_t"
                 if de.fixed.mask == (1 << de.size) - 1:
                     val = f"{de.fixed.val}"
                 else:
