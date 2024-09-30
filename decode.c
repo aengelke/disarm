@@ -24,7 +24,8 @@ static uint64_t immlogical(unsigned sf, unsigned N, unsigned immr,
   unsigned esize = 1 << len;
   uint64_t welem = ((uint64_t)1 << (s + 1)) - 1;
   // ROR(welem, r) as bits(esize)
-  welem = (welem >> r) | (welem << (esize - r));
+  if (r)
+    welem = (welem >> r) | (welem << (esize - r));
   if (esize < 64)
     welem &= ((uint64_t)1 << esize) - 1;
   // Replicate(ROR(welem, r))

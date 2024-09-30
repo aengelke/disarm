@@ -548,10 +548,10 @@ class EncoderGenerator:
         # use XOR s.t. immadd can toggle between add and sub.
         buildexprs = ["(" + "^".join([f"{descmask.val:#x}"] + grandExpansions) + ")"]
         for de in grpdesc:
-            bitmask = ((1 << de.size) - 1) << de.idx
+            bitmask = (1 << de.size) - 1
             if de.name in assignments:
-                buildexprs.append(f"(({assignments[de.name]})<<{de.idx}&{bitmask:#x})")
-            elif descmask.mask & bitmask != bitmask:
+                buildexprs.append(f"((({assignments[de.name]})&{bitmask:#x})<<{de.idx})")
+            elif descmask.mask & (bitmask << de.idx) != (bitmask << de.idx):
                 print("Encode desc missing for", grp, name, de.name, assignments)
                 return
         expr = "|".join(buildexprs)
