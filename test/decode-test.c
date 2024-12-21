@@ -46,6 +46,9 @@ int main(void) {
     TEST(0x8b204000, DA64I_ADD_EXT, "add x0, x0, w0, uxtw #0")
     TEST(0xd4400000, DA64I_HLT, "hlt #0x0")
     TEST(0x1e23c020, DA64I_FCVT, "fcvt h0, s1")
+    TESTF(DA64_HAVE_LSE, 0x08207c1e, DA64I_CASP, "cas w0, w1, w30, wzr, [x0]")
+    TESTF(DA64_HAVE_LSE, 0x08207c1f, DA64I_UNKNOWN, "") // Rt must be even
+    TESTF(DA64_HAVE_LSE, 0x08217c1e, DA64I_UNKNOWN, "") // Rs must be even
     TESTF(DA64_HAVE_BF16, 0x1e634020, DA64I_BFCVT, "bfcvt h0, s1")
   // clang-format on
 

@@ -132,6 +132,12 @@ int main(void) {
   TEST(0x4f10a420, de64_SXTL2_4s(DA_V(0), DA_V(1)));
   TEST(0x4f20a420, de64_SXTL2_2d(DA_V(0), DA_V(1)));
 
+#if DA64_HAVE_LSE
+  TEST(0x08207c1e, de64_CASPw(DA_GP(0), DA_GP(30), DA_GP(0)));
+  TEST(0, de64_CASPw(DA_GP(1), DA_GP(30), DA_GP(0)));
+  TEST(0, de64_CASPw(DA_GP(0), DA_GP(29), DA_GP(0)));
+#endif
+
   puts(failed ? "Some tests FAILED" : "All tests PASSED");
   return failed ? EXIT_FAILURE : EXIT_SUCCESS;
 }

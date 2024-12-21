@@ -430,6 +430,7 @@ ENC_FUNCS = {
     "reggpsp": EncodeFunc(("DA_GRegSP",), ("DA_REGVAL({0})",)),
     "reggpnozr": EncodeFunc(("DA_GReg",), ("DA_REGVAL({0})",)),
     "reggpls64": EncodeFunc(("DA_GReg",), ("DA_REGVAL({0})",), cond="DA_REGVAL({0})<24&&!(DA_REGVAL({0})&1)"),
+    "reggpeven": EncodeFunc(("DA_GReg",), ("DA_REGVAL({0})",), cond="!(DA_REGVAL({0})&1)"),
     "regfp": EncodeFunc(("DA_VReg",), ("DA_REGVAL({0})",)),
     "regfplim": EncodeFunc(("DA_VReg",), ("DA_REGVAL({0})<<16",), singleExpansion=True, cond="DA_REGVAL({0})<{max}"),
     "prfop": EncodeFunc(("enum Da64PrfOp  prfop",), ("{0}&31",)),

@@ -1378,11 +1378,11 @@
   encops: Rs=reggp Rt=reggp Rn=reggpsp
   feat: LSE
 [CASP]
-  desc: 0{1:size}0010000{1:L}1{5:Rs}{1:o0}{5:Rt2=11111}{5:Rn|SP}{5:Rt}
+  desc: 0{1:size}0010000{1:L}1{5:Rs=xxxx0}{1:o0}{5:Rt2=11111}{5:Rn|SP}{5:Rt=xxxx0}
   mnem: CASP{L:0=:1=A}{o0:0=:1=L}
   decode: cas{L:0=:1=a}{o0:0=:1=l} OPreggp(@Rs, @size==3) OPreggp(@Rs+1, @size==3) OPreggp(@Rt, @size==3) OPreggp(@Rt+1, @size==3) OPmemsoff(@Rn, 0)
   encmnem: CASP{L:0=:1=A}{o0:0=:1=L}{size:0=w:1=x}
-  encops: Rs=reggp Rt=reggp Rn=reggpsp
+  encops: Rs=reggpeven Rt=reggpeven Rn=reggpsp
   feat: LSE
 [SWP]
   desc: {2:size}111000{1:A}{1:R}1{5:Rs}100000{5:Rn|SP}{5:Rt}
