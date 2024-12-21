@@ -86,6 +86,10 @@ static char* da_strpcatregv(char* restrict dst, unsigned idx) {
 }
 
 void da64_format(const struct Da64Inst* ddi, char* buf128) {
+  da64_format_abs(ddi, 0, buf128);
+}
+
+void da64_format_abs(const struct Da64Inst* ddi, uint64_t addr, char* buf128) {
   if (ddi->mnem == DA64I_UNKNOWN) {
     *buf128 = '\0';
     return;
@@ -272,6 +276,10 @@ void da64_format(const struct Da64Inst* ddi, char* buf128) {
     case DA_OP_IMMLARGE:
       end = da_strpcat4(end, "#0x", 3);
       end = da_strpcatuimmhex(end, ddi->imm64);
+      break;
+    case DA_OP_RELADDR:
+      end = da_strpcat4(end, "#0x", 3);
+      end = da_strpcatuimmhex(end, ddi->imm64 + addr);
       break;
     case DA_OP_SIMM:
       end = da_strpcatsimmhex16(end, ddi->ops[i].simm16, 3);

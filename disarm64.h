@@ -252,6 +252,8 @@ enum Da64OpType {
   DA_OP_UIMMSHIFT,
   /// Large immediate, stored in imm64.
   DA_OP_IMMLARGE,
+  /// Relative address, stored in imm64.
+  DA_OP_RELADDR,
   /// Floating-point immediate, stored in float8.
   DA_OP_IMMFLOAT,
 };
@@ -320,6 +322,8 @@ struct Da64Inst {
 enum Da64InstKind da64_classify(uint32_t inst);
 void da64_decode(uint32_t inst, struct Da64Inst* ddi);
 void da64_format(const struct Da64Inst* ddi, char* buf128);
+/// Format decoded instruction with absolute address as base.
+void da64_format_abs(const struct Da64Inst* ddi, uint64_t addr, char* buf128);
 
 #ifdef __cplusplus
 }

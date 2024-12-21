@@ -132,7 +132,7 @@ static struct Da64Op OPuimmshift(uint16_t imm, bool msl, unsigned shift) {
 }
 static struct Da64Op OPreladdr(struct Da64Inst* ddi, int64_t imm) {
   ddi->imm64 = imm;
-  return (struct Da64Op){DA_OP_IMMLARGE, {0}, .uimm16 = 0};
+  return (struct Da64Op){DA_OP_RELADDR, {0}, .uimm16 = 0};
 }
 static struct Da64Op OPimmlogical(struct Da64Inst* ddi, unsigned sf, unsigned N,
                                   unsigned immr, unsigned imms) {
