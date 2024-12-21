@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void) {
   const struct {
@@ -58,29 +59,27 @@ int main(void) {
   char buf[128];
   struct Da64Inst res;
 
-  printf("1..%zu\n", sizeof(cases) / sizeof(cases[0]));
+  bool failed = false;
   for (size_t i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
     da64_decode(cases[i].inst, &res);
     da64_format(&res, buf);
 
     if (cases[i].disable_str) {
-      if (res.mnem == DA64I_UNKNOWN && buf[0] == '\0')
-        printf("ok %zu %08x %s (%s) # skip %s\n", i + 1, cases[i].inst,
-               cases[i].fmt, cases[i].mnem_str, cases[i].disable_str);
-      else
-        printf("not ok %zu %08x %s (%s) (!%s)\n", i + 1, cases[i].inst,
-               cases[i].fmt, cases[i].mnem_str, cases[i].disable_str);
-    } else {
-      int ok = res.mnem == cases[i].mnem && !strcmp(buf, cases[i].fmt);
-      printf("%sok %zu %08x %s (%s)\n", &"not "[4 * ok], i + 1, cases[i].inst,
-             cases[i].fmt, cases[i].mnem_str);
-      if (!ok) {
-        printf("# mnem: got=%#x expected=%#x (%s)\n", res.mnem, cases[i].mnem,
-               cases[i].mnem_str);
-        printf("# fmt: got=%s expected=%s\n", buf, cases[i].fmt);
+      if (res.mnem != DA64I_UNKNOWN || buf[0] != '\0') {
+        failed = true;
+        printf("err %08x %s (%s) (!%s)\n", cases[i].inst, cases[i].fmt,
+               cases[i].mnem_str, cases[i].disable_str);
       }
+    } else if (res.mnem != cases[i].mnem || strcmp(buf, cases[i].fmt) != 0) {
+      failed = true;
+      printf("err %08x %s (%s)\n", cases[i].inst, cases[i].fmt,
+             cases[i].mnem_str);
+      printf("  mnem: got=%#x expected=%#x (%s)\n", res.mnem, cases[i].mnem,
+             cases[i].mnem_str);
+      printf("  fmt: got=%s expected=%s\n", buf, cases[i].fmt);
     }
   }
 
-  return 0;
+  puts(failed ? "Some tests FAILED" : "All tests PASSED");
+  return failed ? EXIT_FAILURE : EXIT_SUCCESS;
 }

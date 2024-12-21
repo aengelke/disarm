@@ -7,8 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static unsigned test_MOVconst(void) {
-  unsigned num = 0;
+static bool test_MOVconst(void) {
   static const struct {
     uint64_t cnst;
     uint32_t enc[4];
@@ -43,32 +42,35 @@ static unsigned test_MOVconst(void) {
       {0x1122334400000000, {0xd2c66880, 0xf2e22440}},
       {0x1122000055660000, {0xd2aaacc0, 0xf2e22440}},
   };
+  bool failed = false;
   for (size_t i = 0; i < sizeof(cases) / sizeof(cases[0]); i++) {
     const uint32_t* exp = cases[i].enc;
     unsigned exp_cnt = !exp[1] ? 1 : !exp[2] ? 2 : !exp[3] ? 3 : 4;
 
     uint32_t buf[4] = {0};
     unsigned cnt = de64_MOVconst(buf, DA_GP(0), cases[i].cnst);
-    bool ok = cnt == exp_cnt && !memcmp(buf, exp, sizeof(buf));
-    num++;
-    printf("%sok %u MOVconst %d{%x,%x,%x,%x} %d{%x,%x,%x,%x} %016" PRIx64 "\n",
-           &"not "[4 * ok], num, exp_cnt, exp[0], exp[1], exp[2], exp[3], cnt,
-           buf[0], buf[1], buf[2], buf[3], cases[i].cnst);
+    if (cnt != exp_cnt || memcmp(buf, exp, sizeof(buf)) != 0) {
+      failed = true;
+      printf("err MOVconst %d{%x,%x,%x,%x} %d{%x,%x,%x,%x} %016" PRIx64 "\n",
+             exp_cnt, exp[0], exp[1], exp[2], exp[3], cnt, buf[0], buf[1],
+             buf[2], buf[3], cases[i].cnst);
+    }
   }
-  return num;
+  return failed;
 }
 
-static void test(unsigned num, uint32_t exp, uint32_t encoded,
-                 const char* name) {
-  bool ok = exp == encoded;
-  printf("%sok %u %08x %08x (%s)\n", &"not "[4 * ok], num, exp, encoded, name);
+static bool test(uint32_t exp, uint32_t encoded, const char* name) {
+  if (exp == encoded)
+    return false;
+  printf("err %08x %08x (%s)\n", exp, encoded, name);
+  return true;
 }
-#define TEST(exp, encoded) test(++num, exp, encoded, #encoded)
+#define TEST(exp, encoded) failed |= test(exp, encoded, #encoded)
 
 int main(void) {
-  unsigned num = 0;
+  bool failed = false;
 
-  num += test_MOVconst();
+  failed |= test_MOVconst();
 
 #include "encode-test-adcsbc.inc"
 #include "encode-test-addsub-imm.inc"
@@ -130,6 +132,6 @@ int main(void) {
   TEST(0x4f10a420, de64_SXTL2_4s(DA_V(0), DA_V(1)));
   TEST(0x4f20a420, de64_SXTL2_2d(DA_V(0), DA_V(1)));
 
-  printf("1..%u\n", num);
-  return 0;
+  puts(failed ? "Some tests FAILED" : "All tests PASSED");
+  return failed ? EXIT_FAILURE : EXIT_SUCCESS;
 }
