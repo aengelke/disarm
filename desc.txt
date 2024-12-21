@@ -248,7 +248,7 @@
 [CLZ]
   desc: {1:sf}101101011000000{6:opcode}{5:Rn}{5:Rd}
   mnem: {opcode:4=CLZ:5=CLS:6=CTZ:7=CNT:8=ABS}
-  decode: {opcode:4=clz:5=cls:6=CTZ:7=CNT:8=ABS} OPreggp(@Rd, @sf) OPreggp(@Rn, @sf)
+  decode: {opcode:4=clz:5=cls:6=ctz:7=cnt:8=abs} OPreggp(@Rd, @sf) OPreggp(@Rn, @sf)
   encmnem: {opcode:4=CLZ:5=CLS:6=CTZ:7=CNT:8=ABS}{sf:0=w:1=x}
   encops: Rd=reggp Rn=reggp
   feat: {opcode:4=:5=:6=CSSC:7=CSSC:8=CSSC}

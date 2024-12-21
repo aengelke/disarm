@@ -46,6 +46,10 @@ int main(void) {
     TEST(0x8b204000, DA64I_ADD_EXT, "add x0, x0, w0, uxtw #0")
     TEST(0xd4400000, DA64I_HLT, "hlt #0x0")
     TEST(0x1e23c020, DA64I_FCVT, "fcvt h0, s1")
+    TEST(0xd800001f, DA64I_PRFM_LIT, "prfm #31, #0x0")
+    TEST(0x3ca0f800, DA64I_STR_REG_FP, "str q0, [x0, x0, sxtx #4]")
+    TESTF(DA64_HAVE_CSSC, 0x5ac01800, DA64I_CTZ, "ctz w0, w0")
+    TESTF(DA64_HAVE_CSSC, 0x5ac01c00, DA64I_CNT, "cnt w0, w0")
     TESTF(DA64_HAVE_LSE, 0x08207c1e, DA64I_CASP, "cas w0, w1, w30, wzr, [x0]")
     TESTF(DA64_HAVE_LSE, 0x08207c1f, DA64I_UNKNOWN, "") // Rt must be even
     TESTF(DA64_HAVE_LSE, 0x08217c1e, DA64I_UNKNOWN, "") // Rs must be even

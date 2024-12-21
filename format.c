@@ -99,7 +99,7 @@ void da64_format_abs(const struct Da64Inst* ddi, uint64_t addr, char* buf128) {
 #define DA64_DECSTR
 #include "disarm64-private.inc"
 #undef DA64_DECSTR
-      ;
+      "\0\0\0\0\0\0\0\0\0\0\0\0"; // extra padding to avoid out-of-bounds copies
   static const uint16_t mnemtab[] = {
 #define DA64_DECSTRTAB
 #include "disarm64-private.inc"
@@ -253,7 +253,7 @@ void da64_format_abs(const struct Da64Inst* ddi, uint64_t addr, char* buf128) {
                           ", uxtw #1]\0, lsl #1]\0 , sxtw #1]\0, sxtx #1]\0"
                           ", uxtw #2]\0, lsl #2]\0 , sxtw #2]\0, sxtx #2]\0"
                           ", uxtw #3]\0, lsl #3]\0 , sxtw #3]\0, sxtx #3]\0"
-                          ", uxtw #4]\0, lsl #4]\0 , sxtw #4]\0, sxtx #4]";
+                          ", uxtw #4]\0, lsl #4]\0 , sxtw #4]\0, sxtx #4]\0";
         end = da_strpcat12(
             end, ext + 11 * (optidx + 4 * ddi->ops[i].memreg.shift), 10);
       }
@@ -379,7 +379,7 @@ void da64_format_abs(const struct Da64Inst* ddi, uint64_t addr, char* buf128) {
           "\x09pstl1keep\x09pstl1strm\x09pstl2keep\x09pstl2strm"
           "\x09pstl3keep\x09pstl3strm\x03#22      \x03#23      "
           "\x03#24      \x03#25      \x03#26      \x03#27      "
-          "\x03#28      \x03#29      \x03#30      \x03#31      ";
+          "\x03#28      \x03#29      \x03#30      \x03#31      \0\0";
       const char* prfstrelem = prfstr + 10 * ddi->ops[i].prfop;
       end = da_strpcat12(end, prfstrelem + 1, *prfstrelem);
       break;
