@@ -46,6 +46,8 @@ int main(void) {
     TEST(0x8b204000, DA64I_ADD_EXT, "add x0, x0, w0, uxtw #0")
     TEST(0xd4400000, DA64I_HLT, "hlt #0x0")
     TEST(0x1e23c020, DA64I_FCVT, "fcvt h0, s1")
+    TEST(0x10800000, DA64I_ADR, "adr x0, #0xfffffffffff00000")
+    TEST(0x28200000, DA64I_STNPW, "stnp w0, w0, [x0, #-0x100]")
     TEST(0xd800001f, DA64I_PRFM_LIT, "prfm #31, #0x0")
     TEST(0x3ca0f800, DA64I_STR_REG_FP, "str q0, [x0, x0, sxtx #4]")
     TESTF(DA64_HAVE_CSSC, 0x5ac01800, DA64I_CTZ, "ctz w0, w0")

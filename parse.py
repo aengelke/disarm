@@ -323,14 +323,13 @@ class DecoderGenerator:
         ops = set(x[1:] for x in re.findall(r'@[a-zA-Z0-9_]+', decodestr))
         for de in desc:
             if de.name in ops:
-                ty = "int64_t" if de.flags == "s" else "uint64_t"
                 if de.fixed.mask == (1 << de.size) - 1:
                     val = f"{de.fixed.val}"
                 else:
                     val = f"inst>>{de.idx}&{(1<<de.size)-1:#x}"
                 if de.flags == "s":
                     val = f"sext({val}, {de.size})"
-                res += f"{ty} {de.name} = {val}; "
+                res += f"uint64_t {de.name} = {val}; "
         # Split decodestr, respecting parenthesized operands.
         operands, parendepth = [], 0
         for comp in decodestr.replace("@", "").strip().split():
