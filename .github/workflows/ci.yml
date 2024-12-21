@@ -15,4 +15,15 @@ jobs:
       run: ninja -v -C build
     - name: Test
       run: meson test -v -C build
-
+  build-linux-cmake:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: sudo apt install -y ninja-build cmake
+    - name: Configure
+      run: CC=clang CXX=clang++ cmake -B build -G Ninja
+    - name: Build
+      run: cmake --build build -v
+    - name: Test
+      run: ctest --test-dir build -V
