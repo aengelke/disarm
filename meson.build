@@ -27,7 +27,7 @@ instr_data = custom_target('tables',
                            install: true,
                            install_dir: [get_option('includedir'), false])
 
-libdisarm64 = library('disarm64', 'classify.c', 'decode.c', 'encode.c', 'format.c', instr_data, install: true)
+libdisarm64 = static_library('disarm64', 'classify.c', 'decode.c', 'encode.c', 'format.c', instr_data, install: true)
 disarm64 = declare_dependency(link_with: libdisarm64,
                               include_directories: include_directories('.'),
                               sources: instr_data)
