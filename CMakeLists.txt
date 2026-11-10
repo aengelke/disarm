@@ -59,8 +59,9 @@ target_link_libraries(decode-test disarm64)
 add_test(NAME decode-test COMMAND decode-test)
 
 add_executable(encode-test test/encode-test.c)
-# Disabling optimization substantially reduces compile time.
-target_compile_options(encode-test PRIVATE -O0)
+# Disabling optimization substantially reduces compile time. -O0 is incompatible
+# with _FORTIFY_SOURCE, so disable that.
+target_compile_options(encode-test PRIVATE -O0 -U_FORTIFY_SOURCE)
 target_link_libraries(encode-test disarm64)
 add_test(NAME encode-test COMMAND encode-test)
 
